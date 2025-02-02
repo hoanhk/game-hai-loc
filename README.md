@@ -52,7 +52,7 @@ game-hai-loc/
 │── scripts/
 │   ├── main.js        # Code xử lý logic chính
 │   ├── fireworks.js   # Hiệu ứng pháo hoa
-│   ├── flowers.js     # Hiệu ứng hoa mai rơi
+│   ├── scripts/flowers.js     # Hiệu ứng hoa mai rơi
 │── README.md          # Hướng dẫn sử dụng
 ```
 
