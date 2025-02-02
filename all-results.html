@@ -9,6 +9,8 @@
 </head>
 <body>
 
+    <div id="falling-flowers"></div>
+
     <nav>
         <ul>
             <li><a href="index.html">🏮 Hái lộc</a></li>
@@ -28,13 +30,15 @@
             </thead>
             <tbody></tbody>
         </table>
-        <button onclick="clearAllResults()">🗑 Xóa toàn bộ kết quả</button>
+
+        <!-- Thay thế nút xóa bằng nút trở lại -->
+        <button onclick="window.location.href='index.html'">🔙 Trở lại Hái lộc</button>
     </div>
     
     <script src="flowers.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getDatabase, ref, onChildAdded, remove } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+        import { getDatabase, ref, onChildAdded } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
@@ -56,20 +60,23 @@
 
             onChildAdded(resultsRef, (snapshot) => {
                 const data = snapshot.val();
-                const row = `<tr><td>${tbody.children.length + 1}</td><td>${data.name}</td><td>${data.quote}</td></tr>`;
-                tbody.innerHTML += row;
-            });
-        }
+                const row = document.createElement("tr");
 
-        function clearAllResults() {
-            if (confirm("Bạn có chắc chắn muốn xóa toàn bộ kết quả không?")) {
-                remove(resultsRef).then(() => {
-                    document.querySelector("#resultTable tbody").innerHTML = "";
-                    alert("Đã xóa toàn bộ kết quả!");
-                }).catch(error => {
-                    console.error("Lỗi khi xóa dữ liệu: ", error);
-                });
-            }
+                const cellIndex = document.createElement("td");
+                cellIndex.textContent = tbody.children.length + 1;
+
+                const cellName = document.createElement("td");
+                cellName.textContent = data.name;
+
+                const cellQuote = document.createElement("td");
+                cellQuote.textContent = data.quote;
+
+                row.appendChild(cellIndex);
+                row.appendChild(cellName);
+                row.appendChild(cellQuote);
+                
+                tbody.appendChild(row);
+            });
         }
 
         // Gán vào `window` để có thể gọi từ HTML

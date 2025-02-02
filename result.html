@@ -74,10 +74,45 @@
             animation: fade-in 2s;
         }
 
-        @keyframes fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* Câu lộc dạng câu đối đỏ */
+        .fortune-scroll {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            width: 250px;
+            padding: 20px;
+            background: linear-gradient(to bottom, #D32F2F, #B71C1C);
+            border: 5px solid gold;
+            color: #FFD700;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Brush Script MT', cursive;
+            text-align: center;
+            line-height: 1.5;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fade-in 2s ease-in-out;
         }
+
+        /* Hiệu ứng fade-in */
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Thanh ngang trên và dưới (giống câu đối) */
+        .scroll-top, .scroll-bottom {
+            width: 100%;
+            height: 15px;
+            background: gold;
+            border-radius: 10px;
+            position: absolute;
+            left: 0;
+        }
+
+        .scroll-top { top: -10px; }
+        .scroll-bottom { bottom: -10px; }
     </style>
 </head>
 <body>
@@ -100,7 +135,13 @@
     <div class="container">
         <h1>🎇 Câu Lộc Đầu Xuân 🎇</h1>
         <p id="playerName" style="font-size: 24px; color: #FF4500;"></p>
-        <div id="fortune" class="fortune-box"></div>
+        <div class="fortune-container">
+            <div class="fortune-scroll">
+                <div class="scroll-top"></div> <!-- Thanh vàng trên -->
+                <p id="fortune"></p>
+                <div class="scroll-bottom"></div> <!-- Thanh vàng dưới -->
+            </div>
+        </div>
     </div>
 
     <audio id="fireworkSound" preload="auto">
@@ -132,7 +173,7 @@
             // Hiển thị câu lộc sau khi pháo hoa nổ xong
             setTimeout(() => {
                 const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                fortuneBox.innerText = randomQuote;
+                document.getElementById("fortune").innerHTML = `"${randomQuote}"`;
             }, 5000);
         });
 
