@@ -74,26 +74,6 @@ body {
     100% { transform: translate(var(--x), var(--y)); opacity: 0; }
 }
 
-/* Tiêu đề trang */
-.main-title {
-    font-size: 26px;
-    font-weight: bold;
-    text-align: center;
-    color: #D32F2F; /* Màu đỏ đậm */
-    margin-bottom: 5px;
-    font-family: 'Roboto', sans-serif; /* Sử dụng font tương tự */
-}
-
-.subtitle {
-    font-size: 16px;
-    text-align: center;
-    font-style: italic;
-    color: #6D6D6D; /* Màu xám nhạt */
-    margin-bottom: 15px;
-    line-height: 1.5;
-    font-family: 'Roboto', sans-serif;
-}
-
 /* Làm nổi bật phần câu lộc */
 .fortune-box {
     display: flex;
@@ -113,7 +93,6 @@ body {
     border: 2px solid gold; /* Viền vàng */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Bóng đổ */
     box-sizing: border-box; /* Tránh tràn viền */
-    font-family: 'Roboto', sans-serif; /* Đồng bộ font */
 }
 
 /* Hiệu ứng phát sáng cho câu lộc */

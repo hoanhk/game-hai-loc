@@ -18,19 +18,15 @@
     </nav> -->
 
     <div id="firework-container"></div>
-    
-    <div class="logo-container">
-        <img src="assets/images/sendo-farm-logo.png" alt="Sendo Farm Logo" class="logo">
-    </div>
 
     <div class="container">
-        <h1 class="main-title">🌸 Chào Xuân Mới - Đón Lộc Hay 🌸</h1>
-        <p class="subtitle">"Xuân sang rực rỡ cành đào,<br>hái ngay một lộc ngọt ngào đầu năm! 🌿💖"</p>
+        <img src="https://media3.scdn.vn/img4/2023/10_16/HIJ2DGOZlohnkJBQxSVY.png" alt="Logo Công Ty" class="logo">
+        <h1>🌸 Chào Xuân Mới - Đón Lộc Hay 🌸</h1>
+        <p>"Xuân sang rực rỡ cành đào,<br>hái ngay một lộc ngọt ngào đầu năm! 🌿💖"</p>
         
-        <p id="playerName" style="font-size: 24px;"></p>
+        <p id="playerName"></p>
         <div class="fortune-container">
-            <div class="fortune-box">
-                <p id="fortune"></p>
+            <div class="fortune-box" id="fortune">
             </div>
         </div>
     </div>
@@ -62,7 +58,7 @@
             const fortuneBox = document.getElementById("fortune");
             const fireworkContainer = document.getElementById("firework-container");
 
-            document.getElementById("playerName").innerText = `Chào ${playerName},<br> đây là lộc của bạn!`;
+            document.getElementById("playerName").innerText = `Chào ${playerName}, đây là lộc của bạn!`;
 
             const snapshot = await get(resultsRef);
             let existingQuote = null;
