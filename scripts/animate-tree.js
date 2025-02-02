@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, onChildAdded } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
@@ -15,62 +15,86 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const resultsRef = ref(database, "gameResults");
 
-// Tạo danh sách vị trí trên cây
-const flowerPositions = [
-    { x: 140, y: 90 },
-    { x: 160, y: 120 },
-    { x: 180, y: 80 },
-    { x: 320, y: 100 },
-    { x: 340, y: 130 },
-    { x: 360, y: 90 }
-];
-
-// Chọn ngẫu nhiên loại hoa (Mai hoặc Đào)
-function getRandomFlowerColor() {
-    return Math.random() > 0.5 ? "#FFD700" : "#FF69B4"; // Màu vàng (mai) hoặc hồng (đào)
+// **Danh sách 100 vị trí ngẫu nhiên trên cây**
+const flowerPositions = [];
+for (let i = 0; i < 100; i++) {
+    flowerPositions.push({
+        x: Math.floor(Math.random() * 300) + 100, // Ngẫu nhiên trong khoảng trên cây
+        y: Math.floor(Math.random() * 250) + 50   // Ngẫu nhiên trên nhánh
+    });
 }
 
-// Tạo bông hoa trên cây
-function createFlower(name) {
-    const flowerGroup = document.getElementById("flowers");
+// **Chọn emoji hoa Mai (🌼) hoặc hoa Đào (🌸)**
+function getRandomFlowerEmoji() {
+    return Math.random() > 0.5 ? "🌸" : "🌼"; // 50% Hoa Đào 🌸, 50% Hoa Mai 🌼
+}
 
-    // Chọn vị trí ngẫu nhiên
+// **Xóa toàn bộ hoa trước khi cập nhật**
+function clearFlowers() {
+    const flowerContainer = document.getElementById("flower-layer");
+    if (flowerContainer) {
+        flowerContainer.innerHTML = ""; // Xóa tất cả hoa cũ
+    }
+}
+
+// **Tạo bông hoa trên cây**
+function createFlower(name) {
+    const flowerContainer = document.getElementById("flower-layer");
+
+    if (!flowerContainer) return;
+
+    // Chọn vị trí ngẫu nhiên từ danh sách 100 điểm
     const pos = flowerPositions[Math.floor(Math.random() * flowerPositions.length)];
 
-    // Tạo bông hoa
-    const flower = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    flower.setAttribute("cx", pos.x);
-    flower.setAttribute("cy", pos.y);
-    flower.setAttribute("r", "0"); // Bắt đầu từ 0 để tạo hiệu ứng nở dần
-    flower.setAttribute("fill", getRandomFlowerColor());
+    // **Tạo thẻ `<div>` để hiển thị hoa**
+    const flowerDiv = document.createElement("div");
+    flowerDiv.classList.add("flower");
+    flowerDiv.style.position = "absolute";
+    flowerDiv.style.left = `${pos.x}px`;
+    flowerDiv.style.top = `${pos.y}px`;
+    flowerDiv.style.fontSize = "20px";
+    flowerDiv.style.transition = "transform 1.5s ease-in-out";
+    flowerDiv.textContent = getRandomFlowerEmoji();
 
-    // Tạo hiệu ứng nở hoa
-    const animate = document.createElementNS("http://www.w3.org/2000/svg", "animate");
-    animate.setAttribute("attributeName", "r");
-    animate.setAttribute("from", "0");
-    animate.setAttribute("to", "12");
-    animate.setAttribute("dur", "1.5s");
-    animate.setAttribute("fill", "freeze");
+    // Hiệu ứng nở hoa (scale nhỏ -> lớn)
+    flowerDiv.style.transform = "scale(0)";
+    setTimeout(() => {
+        flowerDiv.style.transform = "scale(1)";
+    }, 500);
 
-    // Thêm hiệu ứng vào hoa
-    flower.appendChild(animate);
+    // **Tạo thẻ `<span>` để hiển thị tên người nhận**
+    const nameTag = document.createElement("span");
+    nameTag.style.position = "absolute";
+    nameTag.style.left = `${pos.x + 15}px`;
+    nameTag.style.top = `${pos.y - 10}px`;
+    nameTag.style.fontSize = "14px";
+    nameTag.style.fontWeight = "bold";
+    nameTag.style.color = "#333";
+    nameTag.textContent = name;
 
-    // Thêm bông hoa vào cây
-    flowerGroup.appendChild(flower);
-
-    // Thêm tên người nhận gần bông hoa
-    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    text.setAttribute("x", pos.x - 10);
-    text.setAttribute("y", pos.y - 15);
-    text.setAttribute("fill", "#000");
-    text.setAttribute("font-size", "12px");
-    text.setAttribute("font-weight", "bold");
-    text.textContent = name;
-    flowerGroup.appendChild(text);
+    // Thêm vào cây
+    flowerContainer.appendChild(flowerDiv);
+    flowerContainer.appendChild(nameTag);
 }
 
-// Lấy dữ liệu từ Firebase và thêm hoa
-onChildAdded(resultsRef, (snapshot) => {
-    const data = snapshot.val();
-    createFlower(data.name);
-});
+// **Tải danh sách hoa từ Firebase**
+function loadFlowers() {
+    clearFlowers(); // Xóa hoa cũ trước khi cập nhật
+
+    get(resultsRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            snapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+                createFlower(data.name);
+            });
+        }
+    }).catch((error) => {
+        console.error("Lỗi tải dữ liệu từ Firebase:", error);
+    });
+}
+
+// **Gọi `loadFlowers()` khi trang tải xong & cập nhật mỗi 5 giây**
+window.onload = () => {
+    loadFlowers();
+    setInterval(loadFlowers, 5000); // Tự động làm mới hoa mỗi 5 giây
+};

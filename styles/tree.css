@@ -49,13 +49,19 @@ body {
     z-index: 2;
 }
 
-/* Bông hoa */
+/* Hiển thị emoji hoa */
 .flower {
-    transform-origin: center;
-    animation: bloom 1.5s ease-in-out;
+    position: absolute;
+    font-size: 20px;
+    transition: transform 1.5s ease-in-out;
 }
 
+/* Hiệu ứng nở hoa */
 @keyframes bloom {
     from { transform: scale(0); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+}
+
+.flower {
+    animation: bloom 1.5s ease-in-out;
 }
