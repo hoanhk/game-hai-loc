@@ -61,11 +61,19 @@
 
         function clearAllResults() {
             if (confirm("Bạn có chắc chắn muốn xóa toàn bộ kết quả không?")) {
-                remove(resultsRef);
-                document.querySelector("#resultTable tbody").innerHTML = "";
+                remove(resultsRef).then(() => {
+                    document.querySelector("#resultTable tbody").innerHTML = "";
+                    alert("Đã xóa toàn bộ kết quả!");
+                }).catch(error => {
+                    console.error("Lỗi khi xóa dữ liệu: ", error);
+                });
             }
         }
 
+        // Gán vào `window` để có thể gọi từ HTML
+        window.loadAllResults = loadAllResults;
+
+        // Gọi loadAllResults khi trang tải
         window.onload = loadAllResults;
     </script>
 
