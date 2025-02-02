@@ -21,26 +21,27 @@ const gameResultsRef = ref(database, "gameResults");
 // Chọn container để thêm hoa
 const flowerLayer = document.getElementById("flower-layer");
 
-// Hàm chọn loại hoa ngẫu nhiên
-function getRandomFlower() {
-    return Math.random() > 0.5 ? "🌼" : "🌸"; // 50% Mai, 50% Đào
-}
+// Hàm chọn vị trí ngẫu nhiên trong cột và hàng cụ thể
+function getRandomPositionForColumn(column, row) {
+    const columnWidth = window.innerWidth / 4; // Mỗi cột chiếm 1/4 chiều rộng
+    const rowHeight = window.innerHeight / 2; // Mỗi hàng chiếm 1/2 chiều cao
 
-// Hàm chọn vị trí ngẫu nhiên tập trung vào nửa trên của màn hình
-function getRandomPosition() {
-    const x = Math.random() * window.innerWidth * 0.8 + window.innerWidth * 0.1; // X ngẫu nhiên (trung tâm ngang)
-    const y = Math.random() * window.innerHeight * 0.5 + window.innerHeight * 0.1; // Y tập trung nửa trên
+    const x = Math.random() * columnWidth + columnWidth * (column - 1); // Tọa độ X trong cột
+    const y = Math.random() * rowHeight + rowHeight * (row - 1); // Tọa độ Y trong hàng
+
     return { x, y };
 }
 
-// Hàm thêm hoa Mai hoặc Đào từ Firebase với hiệu ứng nở trước, sau đó hiển thị tên người chơi
-function addFlowerFromFirebase(playerName) {
-    const { x, y } = getRandomPosition();
+// Hàm thêm hoa Mai hoặc Đào từ Firebase với hiệu ứng nở trước, sau đó hiện tên người chơi
+function addFlowerFromFirebase(playerName, flowerType) {
+    const column = flowerType === "dao" ? 2 : 3; // Hoa Đào ở cột 2, Hoa Mai ở cột 3
+    const row = 1; // Hàng 1 cố định
+    const { x, y } = getRandomPositionForColumn(column, row);
 
     // Tạo hoa
     const flower = document.createElement("div");
     flower.classList.add("flower");
-    flower.textContent = getRandomFlower();
+    flower.textContent = flowerType === "mai" ? "🌼" : "🌸"; // Mai 🌼 hoặc Đào 🌸
     flower.style.position = "absolute";
     flower.style.left = `${x}px`;
     flower.style.top = `${y}px`;
@@ -84,7 +85,8 @@ function loadFlowers() {
         if (snapshot.exists()) {
             snapshot.forEach((childSnapshot) => {
                 const playerData = childSnapshot.val();
-                addFlowerFromFirebase(playerData.name);
+                const flowerType = Math.random() > 0.5 ? "mai" : "dao"; // Chọn loại hoa ngẫu nhiên
+                addFlowerFromFirebase(playerData.name, flowerType);
             });
         }
     });
