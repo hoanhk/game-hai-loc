@@ -44,7 +44,7 @@ game-hai-loc/
 │── index.html         # Trang chính của trò chơi
 │── result.html        # Trang hiển thị câu lộc
 │── all-results.html   # Trang tổng hợp danh sách lộc đã hái
-│── styles.css         # Tệp CSS chứa giao diện và hiệu ứng
+│── styles/styles.css         # Tệp CSS chứa giao diện và hiệu ứng
 │── data.js            # Danh sách 100 câu lộc
 │── firebase-config.js # Cấu hình Firebase
 │── favicon.ico        # Biểu tượng website
