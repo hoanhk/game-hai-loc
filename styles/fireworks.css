@@ -5,8 +5,8 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Lớp phủ màu đen mờ */
-    z-index: -1; /* Đặt lớp phủ phía sau nội dung */
+    background: rgba(255, 255, 255, 0.5); /* Lớp phủ làm sáng */
+    z-index: -1; /* Đặt phía sau nội dung */
 }
 
 /* Hình nền đêm giao thừa */
@@ -76,28 +76,32 @@ body {
 
 /* Tiêu đề trang */
 .main-title {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     text-align: center;
-    color: #FFD700; /* Màu vàng */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Thêm bóng chữ */
+    color: #D32F2F; /* Màu đỏ đậm */
+    margin-bottom: 5px;
+    font-family: 'Roboto', sans-serif; /* Sử dụng font tương tự */
 }
 
 .subtitle {
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     font-style: italic;
-    color: #FFD700; /* Màu vàng */
-    margin-bottom: 20px;
+    color: #6D6D6D; /* Màu xám nhạt */
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-family: 'Roboto', sans-serif;
 }
+
 /* Làm nổi bật phần câu lộc */
 .fortune-box {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 90%; /* Đảm bảo không vượt quá màn hình */
-    max-width: 500px; /* Giới hạn chiều rộng tối đa */
+    width: 90%;
+    max-width: 450px; /* Thu gọn để đồng bộ */
     padding: 20px;
     background: rgba(211, 47, 47, 0.9); /* Màu đỏ đậm trong suốt */
     color: #FFD700; /* Chữ vàng */
@@ -106,9 +110,10 @@ body {
     text-align: center;
     line-height: 1.5;
     border-radius: 12px; /* Bo góc */
-    border: 3px solid gold; /* Viền vàng */
+    border: 2px solid gold; /* Viền vàng */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Bóng đổ */
     box-sizing: border-box; /* Tránh tràn viền */
+    font-family: 'Roboto', sans-serif; /* Đồng bộ font */
 }
 
 /* Hiệu ứng phát sáng cho câu lộc */
@@ -128,4 +133,15 @@ body {
     to {
         box-shadow: 0px 0px 30px 10px rgba(255, 215, 0, 0.8);
     }
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo {
+    max-width: 150px; /* Kích thước logo */
+    height: auto;
 }
