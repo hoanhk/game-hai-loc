@@ -1,0 +1,58 @@
+/* Hiệu ứng pháo hoa */
+#firework-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Không ảnh hưởng đến thao tác người dùng */
+    z-index: 10000; /* Đảm bảo luôn nằm trên cùng */
+}
+
+/* Pháo hoa bắn lên */
+.firework {
+    position: absolute;
+    bottom: 0;
+    width: 4px;
+    height: 50px;
+    background-color: white;
+    animation: launch 2s linear infinite;
+}
+
+/* Hiệu ứng bay lên */
+@keyframes launch {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Vụ nổ */
+.explosion {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+/* Tia sáng từ pháo hoa */
+.spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: yellow;
+    border-radius: 50%;
+    animation: spark-fly 1s ease-out forwards;
+}
+
+/* Hiệu ứng pháo hoa nổ */
+@keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(10); opacity: 0; }
+}
+
+/* Hiệu ứng tia sáng bay ra */
+@keyframes spark-fly {
+    0% { transform: translate(0, 0); opacity: 1; }
+    100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+}
