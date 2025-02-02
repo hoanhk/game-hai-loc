@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Câu Lộc Đầu Xuân</title>
+    <title>Hái Lộc Đầu Xuân</title>
     <link rel="stylesheet" href="styles.css">
     <script src="data.js"></script> <!-- Nạp dữ liệu câu lộc -->
 </head>
@@ -20,19 +20,24 @@
         </ul>
     </nav>
 
-    <!-- Hiển thị kết quả -->
-    <div class="container">
+    <!-- Màn hình đếm ngược -->
+    <div id="countdown-container" class="container">
+        <h1>🌟 Chuẩn bị nhận câu lộc! 🌟</h1>
+        <h2 id="countdown">3</h2>
+    </div>
+
+    <!-- Màn hình hiển thị câu lộc (Ẩn lúc đầu) -->
+    <div id="result-container" class="container" style="display: none;">
         <h1>🎇 Câu Lộc Đầu Xuân 🎇</h1>
         <p id="playerName"></p>
         <h2 id="fortune"></h2>
     </div>
 
     <!-- Âm thanh pháo hoa -->
-    <audio id="fireworkSound" autoplay>
-        <source src="fireworks.mp3" type="audio/mpeg">
+    <audio id="fireworkSound" autoplay loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_55cd760e07.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="flowers.js"></script>
     <!-- Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
@@ -50,22 +55,42 @@
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
+    </script>
+
+    <script>
+        let countdown = 3;
+        const countdownElement = document.getElementById("countdown");
+        const countdownContainer = document.getElementById("countdown-container");
+        const resultContainer = document.getElementById("result-container");
 
         // Lấy tên người chơi từ sessionStorage
         const playerName = sessionStorage.getItem("playerName") || "Khách";
         document.getElementById("playerName").innerText = `Chào ${playerName}, đây là câu lộc của bạn:`;
 
-        // Lấy ngẫu nhiên câu lộc từ `data.js`
-        const randomIndex = Math.floor(Math.random() * quotes.length);
-        const randomQuote = quotes[randomIndex];
-        document.getElementById("fortune").innerText = randomQuote;
+        // Bắt đầu đếm ngược
+        const interval = setInterval(() => {
+            countdown -= 1;
+            countdownElement.innerText = countdown;
 
-        // Lưu kết quả vào Firebase
-        const resultsRef = ref(database, "gameResults");
-        push(resultsRef, { name: playerName, quote: randomQuote });
+            if (countdown === 0) {
+                clearInterval(interval);
+                countdownContainer.style.display = "none"; // Ẩn màn hình đếm ngược
+                resultContainer.style.display = "block"; // Hiển thị câu lộc
 
-        // Phát âm thanh pháo hoa
-        document.getElementById("fireworkSound").play().catch(error => console.log("Âm thanh chưa được kích hoạt do chính sách trình duyệt."));
+                // Lấy ngẫu nhiên câu lộc từ `data.js`
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                const randomQuote = quotes[randomIndex];
+                document.getElementById("fortune").innerText = randomQuote;
+
+                // Lưu kết quả vào Firebase
+                const resultsRef = ref(database, "gameResults");
+                push(resultsRef, { name: playerName, quote: randomQuote });
+            }
+        }, 1000);
+
+        // Tự động phát âm thanh pháo hoa
+        const audio = document.getElementById("fireworkSound");
+        audio.play().catch(error => console.log("Âm thanh chưa được kích hoạt do chính sách trình duyệt."));
     </script>
 
 </body>
