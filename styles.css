@@ -42,9 +42,9 @@ body {
 
 /* Header menu */
 nav {
-    background-color: #d32f2f; /* Màu đỏ */
+    background-color: rgba(211, 47, 47, 0.8); /* Màu đỏ với độ trong suốt 80% */
     padding: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tạo bóng mờ cho menu */
 }
 
 nav ul {
@@ -60,7 +60,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fdd835; /* Màu vàng */
+    color: #fdd835; /* Màu vàng nổi bật */
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
@@ -75,12 +75,21 @@ nav ul li a:hover {
 
 /* Container chính */
 .container {
-    max-width: 90%;
+    max-width: 90%; /* Giới hạn chiều rộng của container */
     margin: 30px auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.9); /* Nền trắng trong suốt */
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Tránh nội dung tràn ra */
+}
+
+/* Thêm logo công ty */
+.logo {
+    display: block;
+    margin: 0 auto 20px; /* Căn giữa logo và thêm khoảng cách phía dưới */
+    max-width: 150px; /* Kích thước tối đa của logo */
+    height: auto;
 }
 
 /* Bảng kết quả */
@@ -116,12 +125,13 @@ tr:hover {
 
 /* Ô nhập thông tin */
 input[type="text"] {
-    width: 100%; /* Đảm bảo ô nhập phủ hết chiều rộng container */
+    width: calc(100% - 20px); /* Trừ khoảng cách để không sát mép */
     padding: 10px;
     font-size: 16px;
     margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước */
 }
 
 /* Nút bấm */

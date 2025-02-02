@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trò chơi hái lộc</title>
+    <title>Trò chơi Hái lộc Đầu xuân</title>
     <link rel="stylesheet" href="styles.css">
     <script src="data.js"></script>
 </head>
@@ -15,22 +15,32 @@
     <!-- Menu điều hướng -->
     <nav>
         <ul>
-            <li><a href="index.html">🏮 Hái lộc</a></li>
+            <li><a href="index.html">🏮 Hái lộc đầu xuân</a></li>
             <li><a href="all-results.html">📜 Xem lộc đã hái</a></li>
         </ul>
     </nav>
 
     <!-- Nội dung chính -->
     <div class="container">
-        <h1>🎋 Trò chơi hái lộc 🎋</h1>
-        <p>Nhập tên của bạn và nhấn "Chơi" để nhận câu lộc!</p>
+        <!-- Logo công ty -->
+        <img src="https://media3.scdn.vn/img4/2023/10_16/HIJ2DGOZlohnkJBQxSVY.png" alt="Logo Công Ty" class="logo">
+        
+        <h1>🌸 Chào Xuân Mới - Đón Lộc Hay 🌸</h1>
+        <p class="intro">
+            "Xuân sang rực rỡ cành đào, <br>
+             Hái ngay một lộc ngọt ngào đầu năm! 🌿💖"
+        </p>
+        <p>
+            Truyền thống hái lộc đầu xuân không chỉ mang lại niềm vui mà còn chứa đựng những lời chúc may mắn, bình an và thành công cho cả năm mới. <br>
+            Hãy nhập tên của bạn và cùng đón nhận những câu lộc đầy ý nghĩa nhé! 🎋✨
+        </p>
 
         <!-- Ô nhập thông tin -->
-        <input type="text" id="playerName" placeholder="Nhập tên của bạn">
+        <input type="text" id="playerName" placeholder="Nhập tên của bạn... 🌿">
 
         <!-- Nút "Chơi" nằm dưới ô nhập thông tin -->
         <div class="button-container">
-            <button onclick="playGame()">🎲 Chơi</button>
+            <button onclick="playGame()">🎲 Hái Lộc Ngay!</button>
         </div>
 
         <h2 id="result"></h2>
