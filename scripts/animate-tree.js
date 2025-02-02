@@ -4,7 +4,7 @@ import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.
 
 // Firebase config
 const firebaseConfig = {
-    apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
+    apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9Q",
     authDomain: "game-hai-loc.firebaseapp.com",
     databaseURL: "https://game-hai-loc-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "game-hai-loc",
@@ -42,14 +42,15 @@ function addFlowerFromFirebase(playerName) {
     flower.style.left = `${x}px`;
     flower.style.top = `${y}px`;
 
-    // Hiển thị tên người chơi bên cạnh hoa
-    const playerTag = document.createElement("span");
+    // Hiển thị tên người chơi bên dưới hoa
+    const playerTag = document.createElement("div");
     playerTag.textContent = playerName;
     playerTag.style.position = "absolute";
     playerTag.style.fontSize = "12px";
-    playerTag.style.color = "#000";
-    playerTag.style.top = `${y - 20}px`;
-    playerTag.style.left = `${x}px`;
+    playerTag.style.color = "rgba(255, 255, 255, 0.8)"; // Màu trắng nhẹ
+    playerTag.style.textAlign = "center";
+    playerTag.style.top = `${y + 30}px`; // Dưới hoa
+    playerTag.style.left = `${x - 10}px`; // Căn chỉnh giữa hoa
 
     // Thêm hoa và tên vào layer
     flowerLayer.appendChild(flower);
