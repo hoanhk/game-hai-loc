@@ -14,24 +14,8 @@
         <animate attributeName="d" from="M270 200 C270 200, 270 200, 270 200" to="M270 200 C300 150, 320 120, 350 100" dur="2s" fill="freeze" />
     </path>
 
-    <!-- Lá trái -->
-    <circle cx="150" cy="100" r="10" fill="#76c893">
-        <animate attributeName="r" from="0" to="10" dur="1.5s" begin="2s" fill="freeze" />
-    </circle>
-
-    <!-- Lá phải -->
-    <circle cx="350" cy="100" r="10" fill="#76c893">
-        <animate attributeName="r" from="0" to="10" dur="1.5s" begin="2s" fill="freeze" />
-    </circle>
-
-    <!-- Hiệu ứng động của thân cây -->
-    <animateTransform attributeName="transform" type="scale" from="1 1" to="1.01 1.01" dur="2s" repeatCount="indefinite" />
-
-    <!-- Hiệu ứng động của lá -->
-    <circle cx="150" cy="100" r="10" fill="#76c893">
-        <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="3s" repeatCount="indefinite" />
-    </circle>
-    <circle cx="350" cy="100" r="10" fill="#76c893">
-        <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="3s" repeatCount="indefinite" />
-    </circle>
+    <!-- Các vị trí để bông hoa nở ra -->
+    <g id="flowers">
+        <!-- Bông hoa sẽ được thêm bằng JavaScript -->
+    </g>
 </svg>

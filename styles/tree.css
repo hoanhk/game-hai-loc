@@ -1,47 +1,61 @@
-/* Container của cây */
+/* Định dạng trang */
+body {
+    background-color: #f7f7f7;
+    font-family: "Arial", sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tiêu đề */
+.main-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #D32F2F;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Cấu trúc hiển thị cây */
 #tree-container {
     position: relative;
-    width: 100%;
-    height: 100vh;
-    background-color: #f7f7f7; /* Màu nền nhạt */
-    overflow: hidden;
+    width: 80vw;
+    height: 80vh;
+    max-width: 800px;
+    margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Hình nền cây SVG */
+/* Hình nền cây */
 #tree-background {
-    width: 80%; /* Kích thước cây */
+    width: 100%;
     height: auto;
     z-index: 1;
 }
 
-/* Container cho các câu quote */
-#quotes-container {
+/* Layer SVG chứa hoa */
+#flower-layer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     z-index: 2;
 }
 
-/* Câu quote hiển thị trên cây */
-.quote {
-    position: absolute;
-    padding: 10px 15px;
-    background: rgba(255, 255, 255, 0.9); /* Nền trắng trong suốt */
-    color: #333; /* Màu chữ */
-    font-size: 14px;
-    font-weight: bold;
-    border: 2px solid #76c893; /* Viền màu xanh lá */
-    border-radius: 12px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+/* Bông hoa */
+.flower {
+    transform-origin: center;
+    animation: bloom 1.5s ease-in-out;
 }
 
-.quote:hover {
-    transform: scale(1.2); /* Phóng to khi hover */
-    z-index: 3;
+@keyframes bloom {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
