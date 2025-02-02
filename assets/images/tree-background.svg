@@ -1,36 +1,15 @@
-<svg id="tree-background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="500px" height="600px">
-    <!-- Thân cây -->
-    <rect x="230" y="250" width="40" height="250" fill="#8B4513" rx="10">
-        <animate attributeName="height" from="0" to="250" dur="2s" fill="freeze" />
-    </rect>
-
-    <!-- Cành 1 (Thấp) -->
-    <path d="M230 250 C180 200, 160 180, 130 160" stroke="#8B4513" stroke-width="8" fill="none">
-        <animate attributeName="d" from="M230 250 C230 250, 230 250, 230 250" to="M230 250 C180 200, 160 180, 130 160" dur="2s" fill="freeze" />
-    </path>
-
-    <path d="M270 250 C320 200, 340 180, 370 160" stroke="#8B4513" stroke-width="8" fill="none">
-        <animate attributeName="d" from="M270 250 C270 250, 270 250, 270 250" to="M270 250 C320 200, 340 180, 370 160" dur="2s" fill="freeze" />
-    </path>
-
-    <!-- Cành 2 (Nhánh giữa) -->
-    <path d="M230 200 C190 160, 170 140, 140 120" stroke="#8B4513" stroke-width="6" fill="none">
-        <animate attributeName="d" from="M230 200 C230 200, 230 200, 230 200" to="M230 200 C190 160, 170 140, 140 120" dur="2s" fill="freeze" />
-    </path>
-
-    <path d="M270 200 C310 160, 330 140, 360 120" stroke="#8B4513" stroke-width="6" fill="none">
-        <animate attributeName="d" from="M270 200 C270 200, 270 200, 270 200" to="M270 200 C310 160, 330 140, 360 120" dur="2s" fill="freeze" />
-    </path>
-
-    <!-- Cành 3 (Ngọn cây) -->
-    <path d="M230 150 C200 110, 180 90, 150 70" stroke="#8B4513" stroke-width="4" fill="none">
-        <animate attributeName="d" from="M230 150 C230 150, 230 150, 230 150" to="M230 150 C200 110, 180 90, 150 70" dur="2s" fill="freeze" />
-    </path>
-
-    <path d="M270 150 C300 110, 320 90, 350 70" stroke="#8B4513" stroke-width="4" fill="none">
-        <animate attributeName="d" from="M270 150 C270 150, 270 150, 270 150" to="M270 150 C300 110, 320 90, 350 70" dur="2s" fill="freeze" />
-    </path>
-
-    <!-- Layer chứa hoa sẽ được thêm bằng JavaScript -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920px" height="1080px">
+    <!-- Layer chứa hoa Mai và Đào sẽ được thêm động bằng JavaScript -->
     <g id="flowers"></g>
+
+    <!-- Các điểm vị trí trên cây -->
+    <circle cx="500" cy="300" r="5" fill="transparent" id="point1"/>
+    <circle cx="700" cy="400" r="5" fill="transparent" id="point2"/>
+    <circle cx="900" cy="250" r="5" fill="transparent" id="point3"/>
+    <circle cx="1100" cy="300" r="5" fill="transparent" id="point4"/>
+    <circle cx="1300" cy="400" r="5" fill="transparent" id="point5"/>
+    <circle cx="1500" cy="500" r="5" fill="transparent" id="point6"/>
+    <circle cx="800" cy="600" r="5" fill="transparent" id="point7"/>
+    <circle cx="1200" cy="700" r="5" fill="transparent" id="point8"/>
+    <!-- Thêm thêm nhiều điểm -->
 </svg>
