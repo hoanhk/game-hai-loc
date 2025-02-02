@@ -3,7 +3,7 @@ body {
     font-family: 'Arial', sans-serif;
     text-align: center;
     background-color: #ffefd5;
-    overflow: hidden;
+    overflow-x: hidden; /* Tránh tràn ngang màn hình */
     margin: 0;
 }
 
@@ -32,21 +32,34 @@ nav ul li a {
     font-weight: bold;
 }
 
+/* Container chính */
 .container {
-    max-width: 500px;
-    margin: 50px auto;
+    max-width: 90%; /* Điều chỉnh kích thước hiển thị trên điện thoại */
+    margin: 30px auto;
     padding: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Ô nhập thông tin */
+input[type="text"] {
+    width: 100%; /* Đảm bảo ô nhập phủ hết chiều rộng container */
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Nút bấm */
 button {
+    width: 100%; /* Nút bấm sẽ rộng toàn bộ trên điện thoại */
     background-color: #ff9800;
     color: white;
     border: none;
-    padding: 10px 15px;
-    font-size: 16px;
+    padding: 12px;
+    font-size: 18px;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
@@ -74,5 +87,36 @@ button:hover {
     }
     100% {
         transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+/* RESPONSIVE CHO MOBILE */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 95%; /* Tối ưu cho điện thoại */
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 22px; /* Giảm kích thước tiêu đề */
+    }
+
+    input[type="text"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px;
+    }
+    
+    nav ul {
+        flex-direction: column; /* Menu xếp dọc trên màn hình nhỏ */
+        text-align: center;
+    }
+
+    nav ul li {
+        margin: 8px 0;
     }
 }
