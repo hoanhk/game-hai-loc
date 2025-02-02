@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả hái lộc</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📜 Kết quả hái lộc 📜</h1>
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>Người chơi</th>
+                    <th>Câu lộc</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button onclick="clearResults()">Xóa kết quả</button>
+    </div>
+
+    <script>
+        function loadResults() {
+            const results = JSON.parse(localStorage.getItem('gameResults')) || [];
+            const tbody = document.querySelector("#resultTable tbody");
+            tbody.innerHTML = "";
+            results.forEach(({ name, quote }) => {
+                const row = `<tr><td>${name}</td><td>${quote}</td></tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function clearResults() {
+            localStorage.removeItem("gameResults");
+            loadResults();
+        }
+
+        window.onload = loadResults;
+    </script>
+</body>
+</html>
