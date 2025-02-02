@@ -37,6 +37,11 @@
             const results = JSON.parse(localStorage.getItem('gameResults')) || [];
             const tbody = document.querySelector("#resultTable tbody");
             tbody.innerHTML = "";
+
+            if (results.length === 0) {
+                tbody.innerHTML = "<tr><td colspan='3'>Chưa có ai hái lộc! Hãy thử ngay!</td></tr>";
+                return;
+            }
             
             results.forEach(({ name, quote }, index) => {
                 const row = `<tr><td>${index + 1}</td><td>${name}</td><td>${quote}</td></tr>`;
@@ -53,5 +58,6 @@
 
         window.onload = loadAllResults;
     </script>
+    <script src="flowers.js"></script>
 </body>
 </html>

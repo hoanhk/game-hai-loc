@@ -25,25 +25,26 @@
         <p id="playerName"></p>
         <h2 id="fortune"></h2>
     </div>
-
+<!-- 
     <audio autoplay>
         <source src="fireworks.mp3" type="audio/mpeg">
-    </audio>
+    </audio> -->
 
     <script>
-        // Lấy tên người chơi từ sessionStorage
-        const playerName = sessionStorage.getItem("playerName");
+        // Lấy tên người chơi
+        const playerName = sessionStorage.getItem("playerName") || "Khách";
         document.getElementById("playerName").innerText = `Chào ${playerName}, đây là câu lộc của bạn:`;
-
-        // Lấy ngẫu nhiên một câu lộc từ quotes (data.js)
+    
+        // Lấy ngẫu nhiên câu lộc từ data.js
         const randomIndex = Math.floor(Math.random() * quotes.length);
         const randomQuote = quotes[randomIndex];
         document.getElementById("fortune").innerText = randomQuote;
-
+    
         // Lưu kết quả vào localStorage
-        const gameResults = JSON.parse(localStorage.getItem("gameResults")) || [];
+        let gameResults = JSON.parse(localStorage.getItem("gameResults")) || [];
         gameResults.push({ name: playerName, quote: randomQuote });
         localStorage.setItem("gameResults", JSON.stringify(gameResults));
     </script>
+    <script src="flowers.js"></script>
 </body>
 </html>
