@@ -21,6 +21,9 @@ const gameResultsRef = ref(database, "gameResults");
 // Chọn container để thêm hoa
 const flowerLayer = document.getElementById("flower-layer");
 
+// Tập hợp để lưu tên người chơi đã hiển thị
+const displayedPlayers = new Set();
+
 // Hàm chọn vị trí ngẫu nhiên trong cột và hàng cụ thể
 function getRandomPositionForColumn(column, row) {
     const columnWidth = window.innerWidth / 4; // Mỗi cột chiếm 1/4 chiều rộng
@@ -81,12 +84,15 @@ function addFlowerFromFirebase(playerName, flowerType) {
 // Lấy danh sách người chơi từ Firebase
 function loadFlowers() {
     onValue(gameResultsRef, (snapshot) => {
-        flowerLayer.innerHTML = ""; // Xóa hoa cũ
         if (snapshot.exists()) {
             snapshot.forEach((childSnapshot) => {
                 const playerData = childSnapshot.val();
-                const flowerType = Math.random() > 0.5 ? "mai" : "dao"; // Chọn loại hoa ngẫu nhiên
-                addFlowerFromFirebase(playerData.name, flowerType);
+                if (!displayedPlayers.has(playerData.name)) {
+                    // Nếu người chơi chưa được hiển thị, thêm vào
+                    const flowerType = Math.random() > 0.5 ? "mai" : "dao"; // Chọn loại hoa ngẫu nhiên
+                    addFlowerFromFirebase(playerData.name, flowerType);
+                    displayedPlayers.add(playerData.name); // Đánh dấu đã hiển thị
+                }
             });
         }
     });
