@@ -1,4 +1,4 @@
-const quotes = [
+export const quotes = [
     "Hãy đặt khách hàng vào trung tâm của mọi việc bạn làm.",
     "Khởi nghiệp là một hành trình dài, chỉ có những người kiên trì mới có thể đến đích.",
     "Chúng ta cần có khát vọng lớn để làm được những điều lớn.",
