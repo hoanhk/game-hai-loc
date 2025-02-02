@@ -81,7 +81,7 @@ body {
     align-items: center;
     flex-direction: column;
     width: 90%;
-    max-width: 450px; /* Thu gọn để đồng bộ */
+    /* max-width: 450px; Thu gọn để đồng bộ */
     padding: 20px;
     background: rgba(211, 47, 47, 0.9); /* Màu đỏ đậm trong suốt */
     color: #FFD700; /* Chữ vàng */
