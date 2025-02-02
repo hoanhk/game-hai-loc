@@ -1,10 +1,15 @@
-/* Tổng thể trang */
+/* Tổng thể */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     text-align: center;
-    background-color: #ffefd5;
-    overflow-x: hidden; /* Tránh tràn ngang màn hình */
+    background-color: #fbe9e7; /* Nền nhẹ nhàng */
+    background-image: url('your-background-image.jpg'); /* Đặt hình nền Tết */
+    background-size: cover; /* Hình nền phủ toàn bộ màn hình */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Giữ cố định hình nền khi cuộn */
     margin: 0;
+    color: #333; /* Màu chữ trung tính */
 }
 
 /* Hiệu ứng hoa mai, hoa đào rơi */
@@ -27,16 +32,19 @@ body {
 @keyframes fall {
     0% {
         transform: translateY(0) rotate(0deg);
+        opacity: 1;
     }
     100% {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(100vh) rotate(360deg) translateX(10px);
+        opacity: 0.8;
     }
 }
 
-/* Menu điều hướng */
+/* Header menu */
 nav {
-    background-color: #d32f2f;
+    background-color: #d32f2f; /* Màu đỏ */
     padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
@@ -52,20 +60,58 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: #fdd835; /* Màu vàng */
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background-color: #fdd835;
+    color: #d32f2f;
 }
 
 /* Container chính */
 .container {
-    max-width: 90%; /* Điều chỉnh kích thước hiển thị trên điện thoại */
+    max-width: 90%;
     margin: 30px auto;
     padding: 20px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9); /* Nền trắng trong suốt */
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Bảng kết quả */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Đảm bảo border-radius áp dụng */
+}
+
+th {
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease-in-out;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hiệu ứng hover */
+tr:hover {
+    background-color: #ffeb3b; /* Màu vàng sáng khi hover */
 }
 
 /* Ô nhập thông tin */
@@ -80,19 +126,19 @@ input[type="text"] {
 
 /* Nút bấm */
 button {
-    width: 100%; /* Nút bấm sẽ rộng toàn bộ trên điện thoại */
-    background-color: #ff9800;
-    color: white;
+    background-color: #fdd835;
+    color: #d32f2f;
     border: none;
-    padding: 12px;
+    padding: 10px 20px;
     font-size: 18px;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 button:hover {
-    background-color: #e65100;
+    background-color: #d32f2f;
+    color: #fdd835;
 }
 
 /* Chỉnh nút "Chơi" nằm dưới ô nhập */
@@ -103,30 +149,25 @@ button:hover {
 /* RESPONSIVE CHO MOBILE */
 @media screen and (max-width: 600px) {
     .container {
-        width: 95%; /* Tối ưu cho điện thoại */
-        padding: 15px;
+        width: 95%;
+        padding: 20px;
     }
 
     h1 {
-        font-size: 22px; /* Giảm kích thước tiêu đề */
+        font-size: 22px;
+        margin-bottom: 10px;
     }
 
     input[type="text"] {
-        font-size: 14px;
-        padding: 8px;
+        font-size: 16px;
+        padding: 10px;
+        width: 90%;
+        margin-bottom: 10px; /* Thêm khoảng cách giữa input và button */
     }
 
     button {
-        font-size: 16px;
-        padding: 10px;
-    }
-    
-    nav ul {
-        flex-direction: column; /* Menu xếp dọc trên màn hình nhỏ */
-        text-align: center;
-    }
-
-    nav ul li {
-        margin: 8px 0;
+        font-size: 18px;
+        padding: 12px;
+        width: 95%; /* Nút bấm rộng hơn để dễ nhấn trên mobile */
     }
 }
