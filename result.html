@@ -7,32 +7,6 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/fireworks.css">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <style>
-        /* Hình nền đêm giao thừa */
-        body {
-            background: url('https://hoanhk.github.io/game-hai-loc/assets/images/result_bkg.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        .fortune-scroll {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            width: 90%;
-            max-width: 400px;
-            padding: 20px;
-            background: rgba(211, 47, 47, 0.7); /* Màu đỏ đậm */
-            color: #FFD700; /* Chữ vàng */
-            font-size: 32px;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.5;
-            border-radius: 10px; /* Bo góc nhẹ */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            animation: fade-in 2s ease-in-out;
-        }
-    </style>
 </head>
 <body>
 
@@ -46,10 +20,13 @@
     <div id="firework-container"></div>
 
     <div class="container">
-        <h1>🎇 Câu Lộc Đầu Xuân 🎇</h1>
+        <h1 class="main-title">🌸 Lời Chúc May Mắn Đầu Xuân 🌸</h1>
+        <p class="subtitle">Một năm mới bình an, hạnh phúc và thành công!</p>
+        
         <p id="playerName" style="font-size: 24px; color: #FF4500;"></p>
         <div class="fortune-container">
-            <div class="fortune-scroll">
+            <div class="fortune-box">
+                <div class="fortune-glow"></div> <!-- Hiệu ứng phát sáng -->
                 <p id="fortune"></p>
             </div>
         </div>
