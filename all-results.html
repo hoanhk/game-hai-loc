@@ -1,90 +1,15 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kết quả hái lộc</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-</head>
-<body>
+    <head>
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="styles/tree.css">
+    </head>
+    <body>
+        <div id="tree-container">
+            <img src="assets/images/tree-background.svg" alt="Cây may mắn" id="tree-background">
+            <div id="quotes-container"></div>
+        </div>
 
-    <div id="falling-flowers"></div>
-
-    <nav>
-        <ul>
-            <li><a href="index.html">🏮 Hái lộc</a></li>
-            <li><a href="all-results.html">📜 Lộc đã hái</a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        <h1>📜 Kết quả hái lộc 📜</h1>
-        <table id="resultTable">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Người chơi</th>
-                    <th>Câu lộc</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-
-        <!-- Thay thế nút xóa bằng nút trở lại -->
-        <button onclick="window.location.href='index.html'">Trở lại Hái lộc</button>
-    </div>
-    
-    <script src="scripts/flowers.js"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getDatabase, ref, onChildAdded } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
-            authDomain: "game-hai-loc.firebaseapp.com",
-            databaseURL: "https://game-hai-loc-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "game-hai-loc",
-            storageBucket: "game-hai-loc.firebasestorage.app",
-            messagingSenderId: "986400836091",
-            appId: "1:986400836091:web:92827f200f821ab507e35e"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-        const resultsRef = ref(database, "gameResults");
-
-        function loadAllResults() {
-            const tbody = document.querySelector("#resultTable tbody");
-            tbody.innerHTML = "";
-
-            onChildAdded(resultsRef, (snapshot) => {
-                const data = snapshot.val();
-                const row = document.createElement("tr");
-
-                const cellIndex = document.createElement("td");
-                cellIndex.textContent = tbody.children.length + 1;
-
-                const cellName = document.createElement("td");
-                cellName.textContent = data.name;
-
-                const cellQuote = document.createElement("td");
-                cellQuote.textContent = data.quote;
-
-                row.appendChild(cellIndex);
-                row.appendChild(cellName);
-                row.appendChild(cellQuote);
-                
-                tbody.appendChild(row);
-            });
-        }
-
-        // Gán vào `window` để có thể gọi từ HTML
-        window.loadAllResults = loadAllResults;
-
-        // Gọi loadAllResults khi trang tải
-        window.onload = loadAllResults;
-    </script>
-
-</body>
+        <script src="scripts/animate-tree.js" type="module"></script>
+    </body>
 </html>
