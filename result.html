@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Câu Lộc Đầu Xuân</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="data.js"></script>
 </head>
 <body>
 
-    <!-- Hiệu ứng hoa mai, hoa đào rơi -->
     <div id="falling-flowers"></div>
 
     <!-- Menu điều hướng -->
@@ -26,26 +26,24 @@
         <h2 id="fortune"></h2>
     </div>
 
+    <audio autoplay>
+        <source src="fireworks.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        // Lấy tên người chơi
+        // Lấy tên người chơi từ sessionStorage
         const playerName = sessionStorage.getItem("playerName");
         document.getElementById("playerName").innerText = `Chào ${playerName}, đây là câu lộc của bạn:`;
 
-        // Lấy ngẫu nhiên câu lộc
-        const quotes = [
-            "Học thầy không tày học bạn.",
-            "Có công mài sắt, có ngày nên kim.",
-            "Đoàn kết là sức mạnh.",
-            "Không có gì quý hơn độc lập, tự do.",
-            "Chăm chỉ là chìa khóa của thành công.",
-            "Sống là không chờ đợi.",
-            "Hãy theo đuổi đam mê, thành công sẽ theo đuổi bạn.",
-            "Đường dài mới biết ngựa hay.",
-            "Hãy làm những gì bạn yêu thích, và bạn sẽ không phải làm việc một ngày nào trong đời.",
-            "Không có áp lực, không có kim cương."
-        ];
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        // Lấy ngẫu nhiên một câu lộc từ quotes (data.js)
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const randomQuote = quotes[randomIndex];
         document.getElementById("fortune").innerText = randomQuote;
+
+        // Lưu kết quả vào localStorage
+        const gameResults = JSON.parse(localStorage.getItem("gameResults")) || [];
+        gameResults.push({ name: playerName, quote: randomQuote });
+        localStorage.setItem("gameResults", JSON.stringify(gameResults));
     </script>
 </body>
 </html>
