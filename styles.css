@@ -3,7 +3,7 @@ body {
     font-family: 'Be Vietnam Pro', sans-serif;
     text-align: center;
     background-color: #fbe9e7; /* Nền nhẹ nhàng */
-    background-image: url('background.jpg'); /* Đặt hình nền Tết */
+    background-image: url('https://hoanhk.github.io/game-hai-loc/background.jpg'); /* Đặt hình nền Tết */
     background-size: cover; /* Hình nền phủ toàn bộ màn hình */
     background-position: center;
     background-repeat: no-repeat;
