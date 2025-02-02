@@ -84,7 +84,17 @@
         import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
         import { quotes } from "./scripts/data.js";  // Sửa lỗi thiếu import
 
-        const firebaseConfig = { /* Firebase Config */ };
+        // Cấu hình Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
+            authDomain: "game-hai-loc.firebaseapp.com",
+            databaseURL: "https://game-hai-loc-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "game-hai-loc",
+            storageBucket: "game-hai-loc.firebasestorage.app",
+            messagingSenderId: "986400836091",
+            appId: "1:986400836091:web:92827f200f821ab507e35e"
+        };
+
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
         const resultsRef = ref(database, "gameResults");
