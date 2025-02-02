@@ -12,6 +12,7 @@
             background: url('https://hoanhk.github.io/game-hai-loc/images/result_bkg.jpg') no-repeat center center fixed;
             background-size: cover;
         }
+
         /* Câu lộc dạng câu đối đỏ */
         .fortune-scroll {
             display: flex;
@@ -50,7 +51,7 @@
         }
 
         .scroll-top { top: -15px; }
-        .scroll-bottom { bottom: -15px; }        
+        .scroll-bottom { bottom: -15px; }
     </style>
 </head>
 <body>
@@ -69,26 +70,19 @@
         <p id="playerName" style="font-size: 24px; color: #FF4500;"></p>
         <div class="fortune-container">
             <div class="fortune-scroll">
-                <div class="scroll-top"></div>
-                <div class="fortune-container">
-                    <div class="fortune-scroll">
-                        <div class="scroll-top"></div> <!-- Thanh vàng trên -->
-                        <p id="fortune"></p>
-                        <div class="scroll-bottom"></div> <!-- Thanh vàng dưới -->
-                    </div>
-                </div>
-                <div class="scroll-bottom"></div>
+                <div class="scroll-top"></div> <!-- Thanh vàng trên -->
+                <p id="fortune"></p>
+                <div class="scroll-bottom"></div> <!-- Thanh vàng dưới -->
             </div>
         </div>
     </div>
-
-    <script src="data.js"></script>
 
     <script type="module">
         import { createFirework } from "./scripts/fireworks.js";
         import { playFireworkSound } from "./scripts/sounds.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+        import { quotes } from "./scripts/data.js";  // Sửa lỗi thiếu import
 
         const firebaseConfig = { /* Firebase Config */ };
         const app = initializeApp(firebaseConfig);
@@ -114,16 +108,19 @@
                 });
             }
 
-            if (existingQuote) {
-                fortuneBox.innerHTML = `"${existingQuote}"`;
-            } else {
-                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                document.getElementById("fortune").innerHTML = `"${randomQuote}"`;
+            // Kiểm tra phần tử có tồn tại trước khi cập nhật
+            if (fortuneBox) {
+                if (existingQuote) {
+                    fortuneBox.innerHTML = `"${existingQuote}"`;
+                } else {
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                    fortuneBox.innerHTML = `"${randomQuote}"`;
 
-                set(ref(database, `gameResults/${playerName}`), {
-                    name: playerName,
-                    quote: randomQuote
-                });
+                    set(ref(database, `gameResults/${playerName}`), {
+                        name: playerName,
+                        quote: randomQuote
+                    });
+                }
             }
 
             playFireworkSound();
