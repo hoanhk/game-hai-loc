@@ -8,14 +8,34 @@
     <script src="data.js"></script>
 </head>
 <body>
+
+    <!-- Hiệu ứng hoa mai, hoa đào rơi -->
+    <div id="falling-flowers"></div>
+
+    <!-- Menu điều hướng -->
+    <nav>
+        <ul>
+            <li><a href="index.html">🏮 Tham gia</a></li>
+            <li><a href="all-results.html">📜 Xem kết quả tất cả</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
         <h1>🎋 Trò chơi hái lộc 🎋</h1>
         <p>Nhập tên của bạn và nhấn "Chơi" để nhận câu lộc!</p>
+
+        <!-- Ô nhập thông tin -->
         <input type="text" id="playerName" placeholder="Nhập tên của bạn">
-        <button onclick="playGame()">Chơi</button>
+
+        <!-- Nút "Chơi" nằm dưới ô nhập thông tin -->
+        <div class="button-container">
+            <button onclick="playGame()">🎲 Chơi</button>
+        </div>
+
         <h2 id="result"></h2>
     </div>
-    <a href="all-results.html">📜 Xem tất cả kết quả</a>
+
     <script src="script.js"></script>
+    <script src="flowers.js"></script>
 </body>
 </html>
