@@ -37,7 +37,6 @@ export const quotes = [
     "Kẻ chiến thắng là người có thể đứng dậy sau mỗi lần vấp ngã.",
     "Sống không thẹn với lòng, chết không hổ với trời.",
     "Hãy làm những gì bạn yêu thích, và bạn sẽ không phải làm việc một ngày nào trong đời.",
-    "Dân là gốc của nước, nếu dân không có thì nước cũng mất.",
     "Không có tri thức, không thể làm chủ được vận mệnh.",
     "Không ai có thể thay đổi quá khứ, nhưng ai cũng có thể thay đổi tương lai.",
     "Sự kiên trì tạo nên kỳ tích.",
