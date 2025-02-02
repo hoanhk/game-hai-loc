@@ -7,6 +7,32 @@ body {
     margin: 0;
 }
 
+/* Hiệu ứng hoa mai, hoa đào rơi */
+#falling-flowers {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Chiều rộng toàn bộ màn hình */
+    height: 100vh; /* Chiều cao toàn bộ màn hình */
+    pointer-events: none; /* Không cản trở các sự kiện chuột hoặc chạm */
+    z-index: 9999; /* Đảm bảo nằm trên các phần tử khác */
+}
+
+.flower {
+    position: absolute;
+    opacity: 0.8;
+    animation-name: fall;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
 /* Menu điều hướng */
 nav {
     background-color: #d32f2f;
@@ -72,22 +98,6 @@ button:hover {
 /* Chỉnh nút "Chơi" nằm dưới ô nhập */
 .button-container {
     margin-top: 10px;
-}
-
-/* Hiệu ứng hoa mai, hoa đào rơi */
-.flower {
-    position: fixed;
-    opacity: 0.8;
-    animation-name: fall;
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(0) rotate(0deg);
-    }
-    100% {
-        transform: translateY(100vh) rotate(360deg);
-    }
 }
 
 /* RESPONSIVE CHO MOBILE */
