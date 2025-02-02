@@ -30,6 +30,7 @@
         <source src="fireworks.mp3" type="audio/mpeg">
     </audio> -->
 
+    <script src="flowers.js"></script>
     <script>
         // Lấy tên người chơi
         const playerName = sessionStorage.getItem("playerName") || "Khách";
@@ -45,6 +46,5 @@
         gameResults.push({ name: playerName, quote: randomQuote });
         localStorage.setItem("gameResults", JSON.stringify(gameResults));
     </script>
-    <script src="flowers.js"></script>
 </body>
 </html>

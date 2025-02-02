@@ -32,6 +32,7 @@
         <button onclick="clearAllResults()">🗑 Xóa toàn bộ kết quả</button>
     </div>
 
+    <script src="flowers.js"></script>
     <script>
         function loadAllResults() {
             const results = JSON.parse(localStorage.getItem('gameResults')) || [];
@@ -58,6 +59,5 @@
 
         window.onload = loadAllResults;
     </script>
-    <script src="flowers.js"></script>
 </body>
 </html>
