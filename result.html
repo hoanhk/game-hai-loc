@@ -35,7 +35,7 @@
 
     <!-- Âm thanh pháo hoa -->
     <audio id="fireworkSound" preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_55cd760e07.mp3" type="audio/mpeg">
+        <source src="fireworks.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Firebase -->
@@ -104,7 +104,9 @@
                     document.getElementById("fortune").innerText = randomQuote;
 
                     // Lưu kết quả vào Firebase
-                    push(resultsRef, { name: playerName, quote: randomQuote });
+                    push(resultsRef, { name: playerName, quote: randomQuote })
+                        .then(() => console.log("Dữ liệu đã được lưu thành công."))
+                        .catch((error) => console.error("Lỗi khi lưu dữ liệu: ", error));
                 }
             }, 1000);
         });
