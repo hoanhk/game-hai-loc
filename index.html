@@ -6,7 +6,6 @@
     <title>Hái Lộc Đầu Xuân</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <script src="scripts/data.js"></script>
 </head>
 <body>
 
@@ -38,29 +37,6 @@
             }
             sessionStorage.setItem("playerName", playerName);
             window.location.href = "result.html";  // Chuyển thẳng sang result.html
-        }
-    </script>
-    
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-    
-        const firebaseConfig = {
-            apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
-            authDomain: "game-hai-loc.firebaseapp.com",
-            databaseURL: "https://game-hai-loc-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "game-hai-loc",
-            storageBucket: "game-hai-loc.firebasestorage.app",
-            messagingSenderId: "986400836091",
-            appId: "1:986400836091:web:92827f200f821ab507e35e"
-        };
-    
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-    
-        function saveResultToFirebase(playerName, quote) {
-            const resultsRef = ref(database, "gameResults");
-            push(resultsRef, { name: playerName, quote: quote });
         }
     </script>
 </body>
