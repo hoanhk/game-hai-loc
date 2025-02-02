@@ -34,7 +34,7 @@
     </div>
 
     <!-- Âm thanh pháo hoa -->
-    <audio id="fireworkSound" autoplay loop>
+    <audio id="fireworkSound" preload="auto">
         <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_55cd760e07.mp3" type="audio/mpeg">
     </audio>
 
@@ -62,10 +62,14 @@
         const countdownElement = document.getElementById("countdown");
         const countdownContainer = document.getElementById("countdown-container");
         const resultContainer = document.getElementById("result-container");
+        const audio = document.getElementById("fireworkSound");
 
         // Lấy tên người chơi từ sessionStorage
         const playerName = sessionStorage.getItem("playerName") || "Khách";
         document.getElementById("playerName").innerText = `Chào ${playerName}, đây là câu lộc của bạn:`;
+
+        // Bắt đầu phát nhạc pháo hoa ngay lập tức
+        audio.play().catch(error => console.log("Âm thanh chưa được kích hoạt do chính sách trình duyệt."));
 
         // Bắt đầu đếm ngược
         const interval = setInterval(() => {
@@ -88,9 +92,11 @@
             }
         }, 1000);
 
-        // Tự động phát âm thanh pháo hoa
-        const audio = document.getElementById("fireworkSound");
-        audio.play().catch(error => console.log("Âm thanh chưa được kích hoạt do chính sách trình duyệt."));
+        // Đợi đúng 4 giây để hiệu ứng pháo hoa nổ rồi hiển thị câu lộc
+        setTimeout(() => {
+            countdownContainer.style.display = "none"; // Ẩn đếm ngược
+            resultContainer.style.display = "block"; // Hiển thị kết quả
+        }, 4000);
     </script>
 
 </body>
