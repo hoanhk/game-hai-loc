@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Câu Lộc Đầu Xuân</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="data.js"></script>
+    <script src="data.js"></script> <!-- Nạp dữ liệu câu lộc -->
 </head>
 <body>
 
+    <!-- Hiệu ứng hoa rơi -->
     <div id="falling-flowers"></div>
 
     <!-- Menu điều hướng -->
@@ -19,23 +20,24 @@
         </ul>
     </nav>
 
-    <!-- Nội dung chính -->
+    <!-- Hiển thị kết quả -->
     <div class="container">
         <h1>🎇 Câu Lộc Đầu Xuân 🎇</h1>
         <p id="playerName"></p>
         <h2 id="fortune"></h2>
     </div>
-<!-- 
-    <audio autoplay>
+
+    <!-- Âm thanh pháo hoa -->
+    <audio id="fireworkSound" autoplay>
         <source src="fireworks.mp3" type="audio/mpeg">
-    </audio> -->
+    </audio>
 
     <script src="flowers.js"></script>
+    <!-- Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-        import { quotes } from "./data.js";
-    
+
         const firebaseConfig = {
             apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
             authDomain: "game-hai-loc.firebaseapp.com",
@@ -45,19 +47,26 @@
             messagingSenderId: "986400836091",
             appId: "1:986400836091:web:92827f200f821ab507e35e"
         };
-    
+
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-    
+
+        // Lấy tên người chơi từ sessionStorage
         const playerName = sessionStorage.getItem("playerName") || "Khách";
         document.getElementById("playerName").innerText = `Chào ${playerName}, đây là câu lộc của bạn:`;
-    
+
+        // Lấy ngẫu nhiên câu lộc từ `data.js`
         const randomIndex = Math.floor(Math.random() * quotes.length);
         const randomQuote = quotes[randomIndex];
         document.getElementById("fortune").innerText = randomQuote;
-    
+
+        // Lưu kết quả vào Firebase
         const resultsRef = ref(database, "gameResults");
         push(resultsRef, { name: playerName, quote: randomQuote });
+
+        // Phát âm thanh pháo hoa
+        document.getElementById("fireworkSound").play().catch(error => console.log("Âm thanh chưa được kích hoạt do chính sách trình duyệt."));
     </script>
+
 </body>
 </html>
