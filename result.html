@@ -5,7 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hái Lộc Đầu Xuân</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="data.js"></script> <!-- Nạp dữ liệu câu lộc -->
+    <style>
+        /* Hiệu ứng động */
+        @keyframes firework-rise {
+            0% { bottom: 0; left: 10%; opacity: 1; }
+            100% { bottom: 50%; left: 50%; opacity: 1; }
+        }
+
+        @keyframes firework-explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Pháo hoa */
+        .firework {
+            position: fixed;
+            bottom: 0;
+            left: 10%;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            animation: firework-rise 4s ease-in-out forwards;
+        }
+
+        .explosion {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: firework-explode 1s ease-out forwards;
+        }
+
+        /* Khung hiển thị câu lộc */
+        .fortune-box {
+            border: 2px dashed #FFD700;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #fff3e0;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            animation: fade-in 2s;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,95 +68,56 @@
         </ul>
     </nav>
 
-    <!-- Màn hình đếm ngược -->
-    <div id="countdown-container" class="container">
-        <h1>🌟 Chuẩn bị nhận câu lộc! 🌟</h1>
-        <h2 id="countdown">3</h2>
-    </div>
+    <!-- Hiệu ứng pháo hoa -->
+    <div id="firework-container"></div>
 
-    <!-- Màn hình hiển thị câu lộc (Ẩn lúc đầu) -->
-    <div id="result-container" class="container" style="display: none;">
+    <!-- Hiển thị câu lộc -->
+    <div class="container">
         <h1>🎇 Câu Lộc Đầu Xuân 🎇</h1>
-        <p id="playerName"></p>
-        <h2 id="fortune"></h2>
+        <p id="playerName" style="font-size: 24px; color: #FF4500;"></p>
+        <div id="fortune" class="fortune-box"></div>
     </div>
 
-    <!-- Âm thanh pháo hoa -->
     <audio id="fireworkSound" preload="auto">
-        <source src="fireworks.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_55cd760e07.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Firebase -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-
-        // Cấu hình Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
-            authDomain: "game-hai-loc.firebaseapp.com",
-            databaseURL: "https://game-hai-loc-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "game-hai-loc",
-            storageBucket: "game-hai-loc.firebasestorage.app",
-            messagingSenderId: "986400836091",
-            appId: "1:986400836091:web:92827f200f821ab507e35e"
-        };
-
-        // Khởi tạo Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        // Định nghĩa `ref` trước khi sử dụng
-        const resultsRef = ref(database, "gameResults");
-
-        // Xuất Firebase object ra global scope (nếu cần)
-        window.firebaseDatabase = { database, resultsRef, push };
-    </script>
-
-    <script>
+        import { quotes } from "./data.js";
+    
         document.addEventListener("DOMContentLoaded", () => {
-            let countdown = 3;
-            const countdownElement = document.getElementById("countdown");
-            const countdownContainer = document.getElementById("countdown-container");
-            const resultContainer = document.getElementById("result-container");
-            const audio = document.getElementById("fireworkSound");
-
-            // Kiểm tra Firebase đã được load từ module chưa
-            if (!window.firebaseDatabase) {
-                console.error("Firebase chưa được khởi tạo đúng cách.");
-                return;
-            }
-
-            const { database, resultsRef, push } = window.firebaseDatabase;
-
-            // Lấy tên người chơi từ sessionStorage
             const playerName = sessionStorage.getItem("playerName") || "Khách";
-            document.getElementById("playerName").innerText = `Chào ${playerName}, đây là câu lộc của bạn:`;
-
-            // Bắt đầu phát nhạc pháo hoa ngay lập tức
-            audio.play().catch(error => console.log("Âm thanh chưa được kích hoạt do chính sách trình duyệt."));
-
-            // Bắt đầu đếm ngược
-            const interval = setInterval(() => {
-                countdown -= 1;
-                countdownElement.innerText = countdown;
-
-                if (countdown === 0) {
-                    clearInterval(interval);
-                    countdownContainer.style.display = "none"; // Ẩn màn hình đếm ngược
-                    resultContainer.style.display = "block"; // Hiển thị câu lộc
-
-                    // Lấy ngẫu nhiên câu lộc từ `data.js`
-                    const randomIndex = Math.floor(Math.random() * quotes.length);
-                    const randomQuote = quotes[randomIndex];
-                    document.getElementById("fortune").innerText = randomQuote;
-
-                    // Lưu kết quả vào Firebase
-                    push(resultsRef, { name: playerName, quote: randomQuote })
-                        .then(() => console.log("Dữ liệu đã được lưu thành công."))
-                        .catch((error) => console.error("Lỗi khi lưu dữ liệu: ", error));
-                }
-            }, 1000);
+            const fortuneBox = document.getElementById("fortune");
+            const fireworkContainer = document.getElementById("firework-container");
+    
+            // Hiển thị tên người nhận câu lộc
+            document.getElementById("playerName").innerText = `Chào ${playerName}, chúc bạn một năm mới an khang!`;
+    
+            // Phát âm thanh pháo hoa
+            const audio = document.getElementById("fireworkSound");
+            audio.play().catch(error => console.log("Không thể phát nhạc: ", error));
+    
+            // Tạo pháo hoa bắn lên
+            const firework = document.createElement("div");
+            firework.classList.add("firework");
+            fireworkContainer.appendChild(firework);
+    
+            // Sau 4 giây, pháo hoa nổ và hiển thị câu lộc
+            setTimeout(() => {
+                firework.remove();
+    
+                // Tạo hiệu ứng nổ pháo hoa
+                const explosion = document.createElement("div");
+                explosion.classList.add("explosion");
+                fireworkContainer.appendChild(explosion);
+    
+                // Hiển thị câu lộc
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                fortuneBox.innerText = randomQuote;
+    
+                // Xóa hiệu ứng pháo nổ sau khi hoàn tất
+                setTimeout(() => explosion.remove(), 1000);
+            }, 4000);
         });
     </script>
 
