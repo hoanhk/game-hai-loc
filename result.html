@@ -82,12 +82,14 @@
         </div>
     </div>
 
+    <script src="data.js"></script>
+
     <script type="module">
         import { createFirework } from "./scripts/fireworks.js";
         import { playFireworkSound } from "./scripts/sounds.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-        import { quotes } from "./data.js";
+        // import { quotes } from "./data.js";
 
         const firebaseConfig = { /* Firebase Config */ };
         const app = initializeApp(firebaseConfig);
