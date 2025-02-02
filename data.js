@@ -1,4 +1,4 @@
-const quotes = [
+export const quotes = [
   "Học thầy không tày học bạn.",
   "Có công mài sắt, có ngày nên kim.",
   "Đoàn kết là sức mạnh.",
