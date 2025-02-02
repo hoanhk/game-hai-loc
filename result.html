@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu Lộc Đầu Xuân</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Hiệu ứng hoa mai, hoa đào rơi -->
+    <div id="falling-flowers"></div>
+
+    <!-- Menu điều hướng -->
+    <nav>
+        <ul>
+            <li><a href="index.html">🏮 Hái lộc đầu xuân</a></li>
+            <li><a href="all-results.html">📜 Xem lộc đã hái</a></li>
+        </ul>
+    </nav>
+
+    <!-- Nội dung chính -->
+    <div class="container">
+        <h1>🎇 Câu Lộc Đầu Xuân 🎇</h1>
+        <p id="playerName"></p>
+        <h2 id="fortune"></h2>
+    </div>
+
+    <!-- Âm thanh pháo hoa -->
+    <audio autoplay>
+        <source src="fireworks.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Lấy tên người chơi
+        const playerName = sessionStorage.getItem("playerName");
+        document.getElementById("playerName").innerText = `Chào ${playerName}, đây là câu lộc của bạn:`;
+
+        // Lấy ngẫu nhiên câu lộc
+        const quotes = [
+            "Học thầy không tày học bạn.",
+            "Có công mài sắt, có ngày nên kim.",
+            "Đoàn kết là sức mạnh.",
+            "Không có gì quý hơn độc lập, tự do.",
+            "Chăm chỉ là chìa khóa của thành công.",
+            "Sống là không chờ đợi.",
+            "Hãy theo đuổi đam mê, thành công sẽ theo đuổi bạn.",
+            "Đường dài mới biết ngựa hay.",
+            "Hãy làm những gì bạn yêu thích, và bạn sẽ không phải làm việc một ngày nào trong đời.",
+            "Không có áp lực, không có kim cương."
+        ];
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        document.getElementById("fortune").innerText = randomQuote;
+    </script>
+</body>
+</html>

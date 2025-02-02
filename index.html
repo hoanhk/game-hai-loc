@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trò chơi Hái lộc Đầu xuân</title>
+    <title>Hái Lộc Đầu Xuân</title>
     <link rel="stylesheet" href="styles.css">
     <script src="data.js"></script>
 </head>
 <body>
 
-    <!-- Hiệu ứng hoa mai, hoa đào rơi -->
     <div id="falling-flowers"></div>
 
-    <!-- Menu điều hướng -->
     <nav>
         <ul>
             <li><a href="index.html">🏮 Hái lộc đầu xuân</a></li>
@@ -20,33 +18,27 @@
         </ul>
     </nav>
 
-    <!-- Nội dung chính -->
     <div class="container">
-        <!-- Logo công ty -->
         <img src="https://media3.scdn.vn/img4/2023/10_16/HIJ2DGOZlohnkJBQxSVY.png" alt="Logo Công Ty" class="logo">
-        
         <h1>🌸 Chào Xuân Mới - Đón Lộc Hay 🌸</h1>
-        <p class="intro">
-            "Xuân sang rực rỡ cành đào, <br>
-             Hái ngay một lộc ngọt ngào đầu năm! 🌿💖"
-        </p>
-        <p>
-            Truyền thống hái lộc đầu xuân không chỉ mang lại niềm vui mà còn chứa đựng những lời chúc may mắn, bình an và thành công cho cả năm mới. <br>
-            Hãy nhập tên của bạn và cùng đón nhận những câu lộc đầy ý nghĩa nhé! 🎋✨
-        </p>
+        <p>"Xuân sang rực rỡ cành đào, hái ngay một lộc ngọt ngào đầu năm! 🌿💖"</p>
 
-        <!-- Ô nhập thông tin -->
         <input type="text" id="playerName" placeholder="Nhập tên của bạn... 🌿">
-
-        <!-- Nút "Chơi" nằm dưới ô nhập thông tin -->
-        <div class="button-container">
-            <button onclick="playGame()">🎲 Hái Lộc Ngay!</button>
-        </div>
-
-        <h2 id="result"></h2>
+        <button onclick="startGame()">🎲 Hái Lộc Ngay!</button>
     </div>
 
-    <script src="script.js"></script>
-    <script src="flowers.js"></script>
+    <script>
+        function startGame() {
+            const playerName = document.getElementById("playerName").value.trim();
+            if (!playerName) {
+                alert("Vui lòng nhập tên của bạn!");
+                return;
+            }
+            // Lưu tên người chơi vào sessionStorage
+            sessionStorage.setItem("playerName", playerName);
+            // Chuyển sang trang đếm ngược
+            window.location.href = "countdown.html";
+        }
+    </script>
 </body>
 </html>

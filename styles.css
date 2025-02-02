@@ -1,6 +1,7 @@
 /* Tổng thể */
 body {
     font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
     text-align: center;
     background-color: #fbe9e7; /* Nền nhẹ nhàng */
     background-image: url('https://hoanhk.github.io/game-hai-loc/background.jpg'); /* Đặt hình nền Tết */
@@ -164,8 +165,15 @@ button:hover {
     }
 
     h1 {
-        font-size: 22px;
+        font-size: 24px;
         margin-bottom: 10px;
+    }
+
+    /* Đoạn mô tả */
+    p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 10px 0;
     }
 
     input[type="text"] {
