@@ -10,20 +10,20 @@
 </head>
 <body>
 
-    <nav>
+    <!-- <nav>
         <ul>
             <li><a href="index.html">🏮 Hái lộc</a></li>
             <li><a href="all-results.html">📜 Lộc đã hái</a></li>
         </ul>
-    </nav>
+    </nav> -->
 
     <div id="firework-container"></div>
 
     <div class="container">
-        <h1 class="main-title">🌸 Lời Hay May Mắn Đầu Xuân 🌸</h1>
-        <p class="subtitle">Một năm mới bình an, hạnh phúc và thành công!</p>
+        <h1 class="main-title">🌸 Lời Hay<br>May Mắn<br>Đầu Xuân 🌸</h1>
+        <p class="subtitle">Một năm mới<br>bình an, hạnh phúc<br>và thành công!</p>
         
-        <p id="playerName" style="font-size: 24px; color: #FF4500;"></p>
+        <p id="playerName" style="font-size: 24px;"></p>
         <div class="fortune-container">
             <div class="fortune-box">
                 <div class="fortune-glow"></div> <!-- Hiệu ứng phát sáng -->
@@ -59,7 +59,7 @@
             const fortuneBox = document.getElementById("fortune");
             const fireworkContainer = document.getElementById("firework-container");
 
-            document.getElementById("playerName").innerText = `Chào ${playerName}, chúc bạn một năm mới an khang!`;
+            document.getElementById("playerName").innerText = `Chào ${playerName}, đây là lộc của bạn!`;
 
             const snapshot = await get(resultsRef);
             let existingQuote = null;

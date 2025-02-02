@@ -86,8 +86,8 @@ body {
 .subtitle {
     font-size: 18px;
     text-align: center;
-    color: #FFFFFF; /* Màu trắng */
     font-style: italic;
+    color: #FFD700; /* Màu vàng */
     margin-bottom: 20px;
 }
 /* Làm nổi bật phần câu lộc */
