@@ -61,12 +61,18 @@ button:hover {
     margin-top: 10px;
 }
 
-/* Hiệu ứng hoa rơi */
-#falling-flowers {
+/* Hiệu ứng hoa mai, hoa đào rơi */
+.flower {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
+    opacity: 0.8;
+    animation-name: fall;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
 }

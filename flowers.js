@@ -4,11 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function createFlower() {
         const flower = document.createElement("div");
         flower.classList.add("flower");
-        flower.innerHTML = "🌸"; // Biểu tượng hoa đào 🌸 hoặc hoa mai 🌼
+        flower.innerHTML = Math.random() > 0.5 ? "🌸" : "🌼"; // Hoa đào 🌸 hoặc hoa mai 🌼
         
-        const size = Math.random() * 20 + 10; 
+        const size = Math.random() * 20 + 10; // Kích thước ngẫu nhiên
         flower.style.fontSize = `${size}px`;
-
         flower.style.position = "fixed";
         flower.style.left = `${Math.random() * 100}vw`;
         flower.style.top = `-30px`;
@@ -21,5 +20,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 5000);
     }
 
-    setInterval(createFlower, 200);
+    setInterval(createFlower, 300);
 });
