@@ -2,7 +2,7 @@ async function runTest() {
     const playerNames = [];
     
     // Tạo danh sách 100 người chơi với tên ngẫu nhiên
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 50; i++) {
         playerNames.push(`Người Chơi ${i}`);
     }
 

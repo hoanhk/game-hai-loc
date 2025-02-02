@@ -48,7 +48,7 @@ function addFlowerFromFirebase(playerName, flowerType) {
     flower.style.position = "absolute";
     flower.style.left = `${x}px`;
     flower.style.top = `${y}px`;
-    flower.style.fontSize = "24px";
+    flower.style.fontSize = "36px";
     flower.style.opacity = "0"; // Ẩn hoa ban đầu
     flower.style.transition = "opacity 1.5s ease, transform 1.5s ease";
     flower.style.transform = "scale(0)"; // Nở dần từ nhỏ đến lớn
