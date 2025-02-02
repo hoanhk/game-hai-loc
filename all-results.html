@@ -8,7 +8,6 @@
 </head>
 <body>
 
-    <!-- Menu điều hướng -->
     <nav>
         <ul>
             <li><a href="index.html">🏮 Hái lộc</a></li>
@@ -16,7 +15,6 @@
         </ul>
     </nav>
 
-    <!-- Nội dung chính -->
     <div class="container">
         <h1>📜 Kết quả hái lộc 📜</h1>
         <table id="resultTable">
@@ -32,32 +30,44 @@
         <button onclick="clearAllResults()">🗑 Xóa toàn bộ kết quả</button>
     </div>
 
-    <script src="flowers.js"></script>
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, onChildAdded, remove } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
+            authDomain: "game-hai-loc.firebaseapp.com",
+            databaseURL: "https://game-hai-loc-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "game-hai-loc",
+            storageBucket: "game-hai-loc.firebasestorage.app",
+            messagingSenderId: "986400836091",
+            appId: "1:986400836091:web:92827f200f821ab507e35e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const resultsRef = ref(database, "gameResults");
+
         function loadAllResults() {
-            const results = JSON.parse(localStorage.getItem('gameResults')) || [];
             const tbody = document.querySelector("#resultTable tbody");
             tbody.innerHTML = "";
 
-            if (results.length === 0) {
-                tbody.innerHTML = "<tr><td colspan='3'>Chưa có ai hái lộc! Hãy thử ngay!</td></tr>";
-                return;
-            }
-            
-            results.forEach(({ name, quote }, index) => {
-                const row = `<tr><td>${index + 1}</td><td>${name}</td><td>${quote}</td></tr>`;
+            onChildAdded(resultsRef, (snapshot) => {
+                const data = snapshot.val();
+                const row = `<tr><td>${tbody.children.length + 1}</td><td>${data.name}</td><td>${data.quote}</td></tr>`;
                 tbody.innerHTML += row;
             });
         }
 
         function clearAllResults() {
             if (confirm("Bạn có chắc chắn muốn xóa toàn bộ kết quả không?")) {
-                localStorage.removeItem("gameResults");
-                loadAllResults();
+                remove(resultsRef);
+                document.querySelector("#resultTable tbody").innerHTML = "";
             }
         }
 
         window.onload = loadAllResults;
     </script>
+
 </body>
 </html>
