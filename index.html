@@ -28,12 +28,22 @@
     </div>
 
     <script src="flowers.js"></script>
+    <script>
+        function startGame() {
+            const playerName = document.getElementById("playerName").value.trim();
+            if (!playerName) {
+                alert("Vui lòng nhập tên của bạn!");
+                return;
+            }
+            sessionStorage.setItem("playerName", playerName);
+            window.location.href = "countdown.html";
+        }
+    </script>
+    
     <script type="module">
-        // Import Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
     
-        // Cấu hình Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyD-xb0w9kSxkTXPLQz5HsyEgBzBhEx9c9Q",
             authDomain: "game-hai-loc.firebaseapp.com",
@@ -44,19 +54,8 @@
             appId: "1:986400836091:web:92827f200f821ab507e35e"
         };
     
-        // Khởi tạo Firebase
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-    
-        function startGame() {
-            const playerName = document.getElementById("playerName").value.trim();
-            if (!playerName) {
-                alert("Vui lòng nhập tên của bạn!");
-                return;
-            }
-            sessionStorage.setItem("playerName", playerName);
-            window.location.href = "countdown.html";
-        }
     
         function saveResultToFirebase(playerName, quote) {
             const resultsRef = ref(database, "gameResults");
